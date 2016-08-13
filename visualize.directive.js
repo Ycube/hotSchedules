@@ -3,15 +3,26 @@
         return {
             templateUrl: 'visualize.data.tpl.html',
             scope: {
-                //edit this             
+                SalesTransactionData : '=data',
             },
             restrict: 'E',
             controller: ['$scope', 'transformFactory', function($scope, transformFactory) {
                 console.log('directive working') 
-                // add your directive functionality here 
-                // you  should pass in the raw SalesTransactions from the controller in scope
-                // then call the transformFactory function or functions to transform the data
-                // then pass it to the directive template (which you should also edit)
+                
+                $scope.setStyle = function style(obj) {
+                    var width = obj.average/4
+                    var randomColor = '#'+(Math.random()*0xFFFFFF<<0).toString(16);
+                    return {
+                      "background-color": randomColor,
+                      "width" : width+'px'
+                    }
+                }
+
+                $scope.$watch('SalesTransactionData', function (data) {
+                    $scope.data = data;
+                    $scope.employees = transformFactory.employeeStats($scope.data);
+                    $scope.aggregate = transformFactory.aggregated($scope.data);
+                });
             }]
         }
     }

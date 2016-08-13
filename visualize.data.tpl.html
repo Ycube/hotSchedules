@@ -1,3 +1,31 @@
 <div>
-    I am the custom directive, replace me with your directive html
+  <nav> <!-- header -->
+    <div class="nav-wrapper">
+      <a href="#" class="brand-logo center">Employee Sales</a>
+      <ul id="nav-mobile" class="left hide-on-med-and-down">
+        <li><a href="https://github.com/bodhi-space/frontend-engineer-takehome">Github Repo</a></li>
+      </ul>
+    </div>
+  </nav>
+  
+  <div> <!-- data template -->
+    <div>
+      <h2 class="center-align">Total: {{ aggregate/100 }} </h2>
+    </div>
+    
+    <div>
+      <div ng-repeat="employee in employees" ng-style="setStyle(employee)">
+         <div class="row">
+          <div class="col s6">
+            <i class="material-icons">perm_identity</i>
+            {{ employee.id}}
+          </div>
+          <div class="col s6">
+            <i class="material-icons">receipt</i>
+            avg: {{ (employee.average/100).toFixed(2) }}
+          </div>
+        </div>
+      </div>  <!-- end ng-repeat -->
+    </div>
+  </div>
 </div>
